@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Techno Rental</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main-container">
+      <div id="splash-screen" class="screen active">
+        <div class="logo">
+          <img src="img/Techno.png" alt="Techno Rental Logo" />
+          <h1>Techno Rental</h1>
+        </div>
+      </div>
+
+      <div id="login-screen" class="screen">
+        <div class="login-content">
+          <h2>Selamat Datang di Techno Rental</h2>
+          <p>Rental motor terpercaya untuk menemani liburan kalian</p>
+
+          <div class="buttons">
+            <button id="btn-phone-login" class="btn-primary">
+              Daftar dengan nomor handphone
+            </button>
+            <button class="btn-google">
+              <img src="img/icon google.png" alt="Google Icon" />
+              Daftar dengan Google
+            </button>
+          </div>
+          <p class="login-link">
+            Sudah punya akun? <a href="#">masuk disini</a>
+          </p>
+        </div>
+      </div>
+
+      <div id="phone-login-screen" class="screen">
+        <div class="header-bar">
+          <span id="back-to-login" class="back-arrow">&#8592;</span>
+        </div>
+        <div class="phone-input-content">
+          <h2>Masukkan nomor handphone aktif untuk masuk</h2>
+          <div class="input-group">
+            <div class="country-code">
+              <img
+                src="img/Indonesia.jpg"
+                alt="Indonesia Flag"
+                class="flag-icon"
+              />
+              <span>+62</span>
+            </div>
+            <input
+              type="tel"
+              placeholder="Contoh: 81234567890"
+              class="phone-number-input"
+            />
+          </div>
+          <button id="btn-submit-phone" class="btn-primary btn-bottom">
+            Masuk
+          </button>
+        </div>
+      </div>
+
+      <div id="otp-screen" class="screen">
+        <div class="header-bar">
+          <span id="back-to-phone-login" class="back-arrow">&#8592;</span>
+        </div>
+        <div class="otp-content">
+          <h2>
+            Masukkan Kode OTP yang telah dikirimkan ke nomor
+            <span id="display-phone-number">+628381234567</span>
+          </h2>
+          <div class="otp-inputs">
+            <input
+              type="text"
+              maxlength="1"
+              class="otp-input"
+              inputmode="numeric"
+              pattern="[0-9]*"
+            />
+            <input
+              type="text"
+              maxlength="1"
+              class="otp-input"
+              inputmode="numeric"
+              pattern="[0-9]*"
+            />
+            <input
+              type="text"
+              maxlength="1"
+              class="otp-input"
+              inputmode="numeric"
+              pattern="[0-9]*"
+            />
+            <input
+              type="text"
+              maxlength="1"
+              class="otp-input"
+              inputmode="numeric"
+              pattern="[0-9]*"
+            />
+          </div>
+          <button id="btn-submit-otp" class="btn-primary btn-bottom">
+            Masuk
+          </button>
+        </div>
+      </div>
+
+      <div id="home-screen" class="screen">
+        <div class="home-header">
+          <div class="profile">
+            <img src="img/avatar.png" alt="User Avatar" class="avatar" />
+            <span>Halo, Danang</span>
+          </div>
+          <span class="material-icons notification-icon">notifications</span>
+        </div>
+
+        <div class="home-main-content">
+          <h1 class="main-question">Mau sewa Kendaraan Dimana ?</h1>
+          <div class="search-and-filter">
+            <div class="search-bar">
+              <span class="material-icons search-icon">search</span>
+              <input type="text" placeholder="Cari Outlet Rental di Gresik" />
+            </div>
+            <div class="location-dropdown">
+              <span>Malang</span>
+              <span class="material-icons dropdown-arrow">arrow_drop_down</span>
+            </div>
+          </div>
+
+          <div class="recommendations-section">
+            <div class="section-header">
+              <h2>Rekomendasi untuk kamu</h2>
+              <a href="#" id="see-all-recommendations" class="see-all"
+                >Lihat Semua
+                <span class="material-icons">arrow_forward</span></a
+              >
+            </div>
+            <div class="product-cards-container">
+              <div class="product-card" data-motor="honda-beat-125">
+                <img src="img/beat.png" alt="Beat 125" class="product-image" />
+                <h3>Beat 125</h3>
+                <p class="product-address">Jln. Jend. Sudirman No.25</p>
+                <div class="product-details">
+                  <span class="rating"
+                    ><span class="material-icons star-icon">star</span> 4.2
+                    (40)</span
+                  >
+                  <span class="price">100k/Hari</span>
+                </div>
+              </div>
+              <div class="product-card" data-motor="honda-vario-150">
+                <img
+                  src="img/vario.png"
+                  alt="Vario 150"
+                  class="product-image"
+                />
+                <h3>Vario 150</h3>
+                <p class="product-address">Jl. Sungai Bambu No.1</p>
+                <div class="product-details">
+                  <span class="rating"
+                    ><span class="material-icons star-icon">star</span> 4.6
+                    (21)</span
+                  >
+                  <span class="price">100k/Hari</span>
+                </div>
+              </div>
+              <div class="product-card" data-motor="honda-pcx-125">
+                <img src="img/pcx.png" alt="PCX 125" class="product-image" />
+                <h3>PCX 125</h3>
+                <p class="product-address">Jln. Jend. Sudirman No.25</p>
+                <div class="product-details">
+                  <span class="rating"
+                    ><span class="material-icons star-icon">star</span> 4.2
+                    (30)</span
+                  >
+                  <span class="price">120k/Hari</span>
+                </div>
+              </div>
+              <div class="product-card" data-motor="yamaha-aerox-155">
+                <img src="img/erok.png" alt="Aerox 155" class="product-image" />
+                <h3>Aerox 155</h3>
+                <p class="product-address">Jl. TB Simatupang No.K</p>
+                <div class="product-details">
+                  <span class="rating"
+                    ><span class="material-icons star-icon">star</span> 4.7
+                    (55)</span
+                  >
+                  <span class="price">130k/Hari</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="bottom-navigation">
+          <a href="#" class="nav-item active" data-target-screen="home-screen">
+            <span class="material-icons">home</span>
+            <span id="nav-beranda-home">Beranda</span>
+          </a>
+          <a
+            href="#"
+            class="nav-item"
+            data-target-screen="pemesanan-berlangsung-screen"
+          >
+            <span class="material-icons">calendar_today</span>
+            <span>Pemesanan</span>
+          </a>
+          <a href="#" class="nav-item" data-target-screen="profile-screen">
+            <span class="material-icons">person</span>
+            <span>Profil</span>
+          </a>
+        </nav>
+      </div>
+
+      <div id="motor-list-screen" class="screen">
+        <div class="list-header">
+          <span id="back-to-home" class="back-arrow">&#8592;</span>
+          <div class="header-location">
+            <span class="material-icons location-icon">location_on</span>
+            <span>Malang</span>
+          </div>
+        </div>
+        <div class="list-content-wrapper">
+          <div class="motor-list-container">
+            <div class="motor-list-card" data-motor="honda-beat-125">
+              <img
+                src="img/beat.png"
+                alt="Honda Beat 125"
+                class="list-product-image"
+              />
+              <div class="list-product-info">
+                <h3>Honda Beat 125</h3>
+                <p class="list-product-address">Jln. Jend. Sudirman No.25</p>
+                <div class="list-product-meta">
+                  <span class="rating"
+                    ><span class="material-icons star-icon">star</span> 4.2
+                    (40)</span
+                  >
+                  <span class="price">100k/Hari</span>
+                </div>
+                <p class="availability">Tersisa 3 Unit Motor</p>
+              </div>
+            </div>
+
+            <div class="motor-list-card" data-motor="honda-vario-150">
+              <img
+                src="img/vario.png"
+                alt="Honda Vario 150"
+                class="list-product-image"
+              />
+              <div class="list-product-info">
+                <h3>Honda Vario 150</h3>
+                <p class="list-product-address">Jln. Jend. Sudirman No.25</p>
+                <div class="list-product-meta">
+                  <span class="rating"
+                    ><span class="material-icons star-icon">star</span> 4.2
+                    (40)</span
+                  >
+                  <span class="price">120k/Hari</span>
+                </div>
+                <p class="availability">Tersisa 1 Unit Motor</p>
+              </div>
+            </div>
+
+            <div class="motor-list-card" data-motor="yamaha-nmax">
+              <img
+                src="img/nmax.png"
+                alt="Yamaha NMAX"
+                class="list-product-image"
+              />
+              <div class="list-product-info">
+                <h3>Yamaha NMAX</h3>
+                <p class="list-product-address">Jln. Jend. Sudirman No.25</p>
+                <div class="list-product-meta">
+                  <span class="rating"
+                    ><span class="material-icons star-icon">star</span> 4.2
+                    (40)</span
+                  >
+                  <span class="price">150k/Hari</span>
+                </div>
+                <p class="availability">Tersisa 6 Unit Motor</p>
+              </div>
+            </div>
+
+            <div class="motor-list-card" data-motor="yamaha-mio-z">
+              <img
+                src="img/mio.png"
+                alt="Yamaha Mio Z"
+                class="list-product-image"
+              />
+              <div class="list-product-info">
+                <h3>Yamaha Mio Z</h3>
+                <p class="list-product-address">Jln. Jend. Sudirman No.25</p>
+                <div class="list-product-meta">
+                  <span class="rating"
+                    ><span class="material-icons star-icon">star</span> 4.2
+                    (40)</span
+                  >
+                  <span class="price">80k/Hari</span>
+                </div>
+                <p class="availability">Tersedia 4 Unit Motor</p>
+              </div>
+            </div>
+
+            <div class="motor-list-card" data-motor="honda-scoopy">
+              <img
+                src="img/scoopy.png"
+                alt="Honda Scoopy"
+                class="list-product-image"
+              />
+              <div class="list-product-info">
+                <h3>Honda Scoopy</h3>
+                <p class="list-product-address">Jln. Jend. Sudirman No.25</p>
+                <div class="list-product-meta">
+                  <span class="rating"
+                    ><span class="material-icons star-icon">star</span> 4.2
+                    (40)</span
+                  >
+                  <span class="price">120k/Hari</span>
+                </div>
+                <p class="availability">Tersisa 1 Unit Motor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="bottom-navigation">
+          <a href="#" class="nav-item active" data-target-screen="home-screen">
+            <span class="material-icons">home</span>
+            <span id="nav-beranda-list">Beranda</span>
+          </a>
+          <a
+            href="#"
+            class="nav-item"
+            data-target-screen="pemesanan-berlangsung-screen"
+          >
+            <span class="material-icons">calendar_today</span>
+            <span>Pemesanan</span>
+          </a>
+          <a href="#" class="nav-item" data-target-screen="profile-screen">
+            <span class="material-icons">person</span>
+            <span>Profil</span>
+          </a>
+        </nav>
+      </div>
+
+      <div id="motor-detail-screen" class="screen">
+        <div class="detail-header">
+          <span id="back-from-detail" class="back-arrow">&#8592;</span>
+        </div>
+        <div class="detail-top-image">
+          <img
+            id="detail-motor-image"
+            src="img/beat.png"
+            alt="Honda Beat 125"
+          />
+        </div>
+
+        <div class="detail-content-card">
+          <h1 id="detail-motor-name">Honda Beat 125</h1>
+          <div class="detail-rating">
+            <span class="material-icons star-icon">star</span>
+            <span id="detail-rating-text">4.2 (40)</span>
+          </div>
+          <div class="detail-address-map">
+            <div class="address-info">
+              <img src="img/map.png" alt="Location Map" class="map-thumbnail" />
+              <p id="detail-address">
+                Jl. Jenderal Sudirman No.25, RT.1/RW.3, Gelora, Kecamatan Tanah
+                Abang, Kota Batu, Kabupaten Malang 10270
+              </p>
+            </div>
+            <a href="#" class="google-maps-link">Buka di Google Maps</a>
+          </div>
+
+          <div class="specs-reviews-tabs">
+            <span id="tab-spesifikasi" class="tab-item active"
+              >Spesifikasi</span
+            >
+            <span id="tab-review" class="tab-item">Review</span>
+          </div>
+
+          <div id="spesifikasi-content" class="tab-content active">
+            <table>
+              <tr>
+                <td>Mesin:</td>
+                <td>SOHC 4-tak</td>
+              </tr>
+              <tr>
+                <td>Kapasitas mesin:</td>
+                <td>124.9 cc</td>
+              </tr>
+              <tr>
+                <td>Transmisi:</td>
+                <td>Otomatis CVT</td>
+              </tr>
+              <tr>
+                <td>Kapasitas tangki bahan bakar:</td>
+                <td>4 liter</td>
+              </tr>
+              <tr>
+                <td>Suspensi depan:</td>
+                <td>Teleskopik</td>
+              </tr>
+              <tr>
+                <td>Suspensi belakang:</td>
+                <td>Unit swing</td>
+              </tr>
+              <tr>
+                <td>Berat kosong:</td>
+                <td>Sekitar 94 kg</td>
+              </tr>
+            </table>
+          </div>
+
+          <div id="review-content" class="tab-content">
+            <p>Belum ada ulasan untuk motor ini.</p>
+          </div>
+        </div>
+
+        <div class="detail-bottom-bar">
+          <div class="price-info">
+            <span>Harga Sewa Per Hari</span>
+            <span class="price-value"
+              >Rp. <span id="detail-price">100.000</span></span
+            >
+          </div>
+          <button id="rent-now-button" class="btn-primary rent-now-button">
+            Sewa Sekarang
+          </button>
+        </div>
+        <nav class="bottom-navigation">
+          <a href="#" class="nav-item active" data-target-screen="home-screen">
+            <span class="material-icons">home</span>
+            <span id="nav-beranda-detail">Beranda</span>
+          </a>
+          <a
+            href="#"
+            class="nav-item"
+            data-target-screen="pemesanan-berlangsung-screen"
+          >
+            <span class="material-icons">calendar_today</span>
+            <span>Pemesanan</span>
+          </a>
+          <a href="#" class="nav-item" data-target-screen="profile-screen">
+            <span class="material-icons">person</span>
+            <span>Profil</span>
+          </a>
+        </nav>
+      </div>
+
+      <div id="date-selection-screen" class="screen date-selection-modal">
+        <div class="date-selection-content-wrapper">
+          <div class="date-selection-header">
+            <span id="back-from-date-selection" class="back-arrow"
+              >&#8592;</span
+            >
+            <h3>Pilih Tanggal</h3>
+          </div>
+
+          <div class="calendar-container">
+            <div class="calendar-header">
+              <span class="calendar-nav-arrow" id="prev-month">&#x2039;</span>
+              <h4 id="current-month-year">Januari 2025</h4>
+              <span class="calendar-nav-arrow" id="next-month">&#x203A;</span>
+            </div>
+            <div class="calendar-weekdays">
+              <span>Min</span>
+              <span>Sen</span>
+              <span>Sel</span>
+              <span>Rab</span>
+              <span>Kam</span>
+              <span>Jum</span>
+              <span>Sab</span>
+            </div>
+            <div class="calendar-dates" id="calendar-dates"></div>
+          </div>
+          <button
+            id="select-date-button"
+            class="btn-primary select-date-button"
+          >
+            Pilih Tanggal
+          </button>
+        </div>
+      </div>
+
+      <div id="order-summary-screen" class="screen">
+        <div class="order-summary-header">
+          <span id="back-from-order-summary" class="back-arrow">&#8592;</span>
+          <h3>Pesanan Anda</h3>
+        </div>
+        <div class="order-summary-content-card">
+          <div class="order-section">
+            <h4>Data Pesanan</h4>
+            <p class="section-description">Ringkasan pesanan motor anda</p>
+            <div class="order-item">
+              <p><span id="order-date">Sabtu, 3 Januari 2025</span></p>
+              <p><span id="order-motor-name">Honda Beat 125</span></p>
+              <button id="btn-ubah-data-pesanan" class="btn-change">
+                Ubah
+              </button>
+            </div>
+          </div>
+
+          <div class="order-section">
+            <h4>Pemesanan</h4>
+            <p class="section-description">
+              Kami akan mengirimkan semua e-tiket/voucher dari pesanan ini
+              kepada kontak yang diisi di profil kamu
+            </p>
+            <div class="order-item">
+              <p>Danang</p>
+              <p>+62812345678</p>
+              <button id="btn-ubah-pemesanan" class="btn-change">Ubah</button>
+            </div>
+          </div>
+
+          <div class="order-section">
+            <h4>Pembayaran</h4>
+            <p class="section-description">
+              Lakukan pembayaran anda dengan mudah
+            </p>
+            <div class="order-item">
+              <p id="selected-payment-method">Pilih Metode Pembayaran</p>
+              <button id="btn-ubah-pembayaran" class="btn-change">Ubah</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-summary-bottom-bar">
+          <div class="total-price-info">
+            <span>Harga Total</span>
+            <span class="total-price-value"
+              >Rp. <span id="total-order-price">100.000</span></span
+            >
+          </div>
+          <button id="payment-button" class="btn-primary payment-button">
+            Pembayaran
+          </button>
+        </div>
+        <nav class="bottom-navigation">
+          <a href="#" class="nav-item active" data-target-screen="home-screen">
+            <span class="material-icons">home</span>
+            <span id="nav-beranda-summary">Beranda</span>
+          </a>
+          <a
+            href="#"
+            class="nav-item"
+            data-target-screen="pemesanan-berlangsung-screen"
+          >
+            <span class="material-icons">calendar_today</span>
+            <span>Pemesanan</span>
+          </a>
+          <a href="#" class="nav-item" data-target-screen="profile-screen">
+            <span class="material-icons">person</span>
+            <span>Profil</span>
+          </a>
+        </nav>
+      </div>
+
+      <div id="payment-method-modal" class="screen date-selection-modal">
+        <div class="payment-method-content-wrapper">
+          <div class="payment-method-header">
+            <span id="back-from-payment-method" class="back-arrow"
+              >&#8592;</span
+            >
+            <h3>Pilih Metode Pembayaran</h3>
+          </div>
+
+          <div class="payment-options">
+            <div class="payment-section-title">Transfer Bank</div>
+            <div class="payment-option" data-method="BCA">
+              <img src="img/bca.png" alt="BCA Logo" class="bank-logo" />
+              <span>BCA</span>
+              <input
+                type="radio"
+                name="payment-method"
+                value="BCA"
+                data-account="012345678910"
+                data-owner="TechnoRental"
+              />
+            </div>
+            <div class="payment-option" data-method="BNI">
+              <img src="img/bni.png" alt="BNI Logo" class="bank-logo" />
+              <span>BNI</span>
+              <input
+                type="radio"
+                name="payment-method"
+                value="BNI"
+                data-account="098765432109"
+                data-owner="TechnoRental"
+              />
+            </div>
+            <div class="payment-option" data-method="Mandiri">
+              <img src="img/mandiri.png" alt="Mandiri Logo" class="bank-logo" />
+              <span>Mandiri</span>
+              <input
+                type="radio"
+                name="payment-method"
+                value="Mandiri"
+                data-account="123456789012"
+                data-owner="TechnoRental"
+              />
+            </div>
+
+            <div class="payment-section-title">Transfer E-Wallet</div>
+            <div class="payment-option" data-method="OVO">
+              <img src="img/ovo.png" alt="OVO Logo" class="ewallet-logo" />
+              <span>OVO</span>
+              <input
+                type="radio"
+                name="payment-method"
+                value="OVO"
+                data-account="081234567890"
+                data-owner="Danang"
+              />
+            </div>
+            <div class="payment-option" data-method="DANA">
+              <img src="img/dana.png" alt="DANA Logo" class="ewallet-logo" />
+              <span>DANA</span>
+              <input
+                type="radio"
+                name="payment-method"
+                value="DANA"
+                data-account="085612345678"
+                data-owner="Danang"
+              />
+            </div>
+            <div class="payment-option" data-method="GOPAY">
+              <img src="img/gopay.png" alt="GOPAY Logo" class="ewallet-logo" />
+              <span>GOPAY</span>
+              <input
+                type="radio"
+                name="payment-method"
+                value="GOPAY"
+                data-account="087890123456"
+                data-owner="Danang"
+              />
+            </div>
+            <div class="payment-option" data-method="LINKAJA">
+              <img
+                src="img/link aja.png"
+                alt="LINKAJA Logo"
+                class="ewallet-logo"
+              />
+              <span>LINKAJA</span>
+              <input
+                type="radio"
+                name="payment-method"
+                value="LINKAJA"
+                data-account="082198765432"
+                data-owner="Danang"
+              />
+            </div>
+          </div>
+
+          <button
+            id="btn-pilih-payment-method"
+            class="btn-primary select-date-button"
+          >
+            Pilih
+          </button>
+        </div>
+      </div>
+
+      <div id="payment-confirmation-screen" class="screen">
+        <div class="conf-header">
+          <span id="back-from-confirmation" class="back-arrow">&#8592;</span>
+          <h3>Konfirmasi Pembayaran</h3>
+        </div>
+        <div class="conf-content-card">
+          <div class="conf-motor-info">
+            <div class="motor-name-date">
+              <p id="conf-motor-name">Honda Beat 125</p>
+              <p id="conf-date">Sabtu, 3 Januari 2025 | 18.00</p>
+            </div>
+            <button id="btn-conf-ubah-data-pesanan" class="btn-change">
+              Ubah
+            </button>
+          </div>
+
+          <div class="conf-payment-details">
+            <div class="payment-method-row">
+              <img
+                id="conf-payment-logo"
+                src="path/to/your/bca-logo.png"
+                alt="BCA Logo"
+                class="payment-logo"
+              />
+              <div>
+                <p id="conf-payment-method-name">Transfer Bank BCA</p>
+                <p id="conf-account-details">012345678910 a.n. TechnoRental</p>
+              </div>
+              <button id="btn-conf-ubah-pembayaran" class="btn-change">
+                Ubah
+              </button>
+            </div>
+            <a href="#" class="view-qr-code">Lihat QR Code</a>
+          </div>
+
+          <div class="payment-timer-section">
+            <div class="timer-icon">
+              <span class="material-icons">timer</span>
+              <span>Lakukan pembayaran dalam</span>
+            </div>
+            <div class="timer-display">
+              <span id="timer-hours">01</span>
+              <span>:</span>
+              <span id="timer-minutes">23</span>
+              <span>:</span>
+              <span id="timer-seconds">45</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="conf-bottom-bar">
+          <div class="total-price-info">
+            <span>Harga Total</span>
+            <span class="total-price-value"
+              >Rp. <span id="conf-total-price">100.000</span></span
+            >
+          </div>
+          <button
+            id="btn-konfirmasi-pembayaran"
+            class="btn-primary payment-button"
+          >
+            Konfirmasi Pembayaran
+          </button>
+        </div>
+        <nav class="bottom-navigation">
+          <a href="#" class="nav-item active" data-target-screen="home-screen">
+            <span class="material-icons">home</span>
+            <span id="nav-beranda-confirmation">Beranda</span>
+          </a>
+          <a
+            href="#"
+            class="nav-item"
+            data-target-screen="pemesanan-berlangsung-screen"
+          >
+            <span class="material-icons">calendar_today</span>
+            <span>Pemesanan</span>
+          </a>
+          <a href="#" class="nav-item" data-target-screen="profile-screen">
+            <span class="material-icons">person</span>
+            <span>Profil</span>
+          </a>
+        </nav>
+      </div>
+
+      <div id="payment-success-screen" class="screen">
+        <div class="success-header">
+          <span class="material-icons check-circle-icon">check_circle</span>
+          <h3>Pembayaran Berhasil</h3>
+        </div>
+        <div class="success-content-card">
+          <h2>Penyewaan Motor Berhasil</h2>
+          <div class="success-details">
+            <div class="detail-row">
+              <span>Tanggal</span>
+              <span id="success-date">Sabtu, 3 Januari 2025</span>
+            </div>
+            <div class="detail-row">
+              <span>Waktu</span>
+              <span id="success-time">18.00</span>
+            </div>
+            <div class="detail-row">
+              <span>Jenis Motor</span>
+              <span id="success-motor-name">Honda Beat 125</span>
+            </div>
+            <div class="detail-row">
+              <span>Metode Pembayaran</span>
+              <span id="success-payment-method">Transfer BCA</span>
+            </div>
+            <div class="total-cost-row">
+              <span>Total Biaya</span>
+              <span id="success-total-cost">100.000</span>
+            </div>
+          </div>
+        </div>
+        <div class="success-bottom-bar">
+          <button id="btn-lihat-e-tiket" class="btn-primary full-width-button">
+            Lihat E-Tiket
+          </button>
+        </div>
+        <nav class="bottom-navigation">
+          <a href="#" class="nav-item active" data-target-screen="home-screen">
+            <span class="material-icons">home</span>
+            <span id="nav-beranda-success">Beranda</span>
+          </a>
+          <a
+            href="#"
+            class="nav-item"
+            data-target-screen="pemesanan-berlangsung-screen"
+          >
+            <span class="material-icons">calendar_today</span>
+            <span>Pemesanan</span>
+          </a>
+          <a href="#" class="nav-item" data-target-screen="profile-screen">
+            <span class="material-icons">person</span>
+            <span>Profil</span>
+          </a>
+        </nav>
+      </div>
+
+      <div id="pemesanan-berlangsung-screen" class="screen">
+        <div class="header-tabs">
+          <span class="active">Pemesanan Berlangsung</span>
+          <span>Riwayat Pemesanan</span>
+        </div>
+        <h2>Penyewaan Motor anda</h2>
+        <div class="booking-card">
+          <div class="card-header">
+            <span>Honda Beat</span>
+            <button class="chat-button">
+              Chat Penyewa
+              <span class="notification-dot"></span>
+            </button>
+          </div>
+          <div class="card-content">
+            <p><strong>Beat 125</strong></p>
+            <p>Sabtu, 3 Januari 2025</p>
+            <p>Pukul 18.00</p>
+          </div>
+          <a href="#" class="view-e-ticket-button">Lihat E-Tiket</a>
+        </div>
+        <nav class="bottom-navigation">
+          <a href="#" class="nav-item" data-target-screen="home-screen">
+            <span class="material-icons">home</span>
+            <span>Beranda</span>
+          </a>
+          <a
+            href="#"
+            class="nav-item active"
+            data-target-screen="pemesanan-berlangsung-screen"
+          >
+            <span class="material-icons">calendar_today</span>
+            <span>Pemesanan</span>
+          </a>
+          <a href="#" class="nav-item" data-target-screen="profile-screen">
+            <span class="material-icons">person</span>
+            <span>Profil</span>
+          </a>
+        </nav>
+      </div>
+
+      <div id="profile-screen" class="screen">
+        <div class="profile-header">
+          <div class="profile-avatar-container">
+            <img
+              src="img/avatar.png"
+              alt="User Avatar"
+              class="profile-avatar"
+            />
+            <span class="material-icons camera-icon">photo_camera</span>
+          </div>
+          <h2 class="profile-name">Danang</h2>
+          <p class="profile-phone">083812345678</p>
+        </div>
+
+        <div class="profile-options">
+          <div class="option-item">
+            <span class="material-icons option-icon">person</span>
+            <span class="option-text">Ubah Profil</span>
+            <span class="material-icons arrow-icon">chevron_right</span>
+          </div>
+          <div class="option-item">
+            <span class="material-icons option-icon">lock</span>
+            <span class="option-text">Ganti Password</span>
+            <span class="material-icons arrow-icon">chevron_right</span>
+          </div>
+          <div class="option-item">
+            <span class="material-icons option-icon">calendar_month</span>
+            <span class="option-text">Riwayat Penyewaan</span>
+            <span class="material-icons arrow-icon">chevron_right</span>
+          </div>
+          <div id="logoutButton" class="option-item logout-option">
+            <span class="material-icons option-icon">logout</span>
+            <span class="option-text">Keluar</span>
+          </div>
+        </div>
+
+        <nav class="bottom-navigation">
+          <a href="#" class="nav-item" data-target-screen="home-screen">
+            <span class="material-icons">home</span>
+            <span>Beranda</span>
+          </a>
+          <a
+            href="#"
+            class="nav-item"
+            data-target-screen="pemesanan-berlangsung-screen"
+          >
+            <span class="material-icons">calendar_today</span>
+            <span>Pemesanan</span>
+          </a>
+          <a
+            href="#"
+            class="nav-item active"
+            data-target-screen="profile-screen"
+          >
+            <span class="material-icons">person</span>
+            <span>Profil</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

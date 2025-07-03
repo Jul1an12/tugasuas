@@ -1,0 +1,2161 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #5c5253; /* Outer background */
+  overflow: hidden; /* Prevent body scroll, main-container handles it */
+}
+
+.main-container {
+  width: 100%;
+  max-width: 400px; /* Standard mobile width */
+  height: 100vh; /* Full viewport height */
+  background-color: #2f2942; /* Main app background color */
+  position: relative; /* For absolute positioned screens */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); /* Stronger shadow */
+  overflow-y: auto; /* Enable vertical scrolling for content */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  display: flex; /* Use flexbox to manage screen stacking */
+  flex-direction: column;
+}
+
+/* Base styles for all screens */
+.screen {
+  width: 100%;
+  min-height: 100%; /* Take full height of main-container */
+  position: absolute; /* Stacked on top of each other */
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  /* Default alignment for most screens, can be overridden */
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* Disable interaction when not active */
+  color: white;
+  box-sizing: border-box;
+  padding: 20px; /* Default padding for content within screen */
+  z-index: 10; /* Default z-index for regular screens */
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  position: relative; /* Change to relative when active to occupy space and allow scrolling */
+  z-index: 10; /* Keep consistent z-index */
+}
+
+/* Special handling for modal screens */
+.screen.modal {
+  background-color: rgba(0, 0, 0, 0.7); /* Overlay semi-transparent */
+  justify-content: center;
+  align-items: center;
+  z-index: 30; /* Higher z-index for modals */
+  padding: 0; /* Content wrapper will handle padding */
+}
+
+/* Hide modal when it's not active, but keep its z-index if active */
+.screen.modal:not(.active) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* --- Splash Screen --- */
+#splash-screen {
+  background-color: #2f2942;
+  justify-content: center;
+  align-items: center;
+}
+
+#splash-screen .logo {
+  text-align: center;
+}
+
+#splash-screen .logo img {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+#splash-screen .logo h1 {
+  margin: 0;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+/* --- Login/Register Screen --- */
+#login-screen {
+  background-color: #2f2942;
+  justify-content: flex-end; /* Push content to bottom */
+  padding-bottom: 50px; /* Space from bottom edge */
+}
+
+.login-content {
+  width: 100%;
+  text-align: left;
+  max-width: 300px; /* Content width constraint */
+}
+
+.login-content h2 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.login-content p {
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  color: #cccccc;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.buttons button {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary {
+  background-color: #4c465e;
+  color: white;
+  font-weight: 600;
+}
+
+.btn-google {
+  background-color: #f8f8f8;
+  color: #333;
+  font-weight: 600;
+}
+
+.btn-google img {
+  width: 20px;
+  height: 20px;
+}
+
+.login-link {
+  text-align: center;
+  font-size: 0.9em;
+  color: #cccccc;
+}
+
+.login-link a {
+  color: #8c82fe;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* --- Phone Login Screen --- */
+#phone-login-screen {
+  background-color: #2f2942;
+  justify-content: flex-start; /* Push content to top */
+  align-items: center;
+  padding-top: 20px; /* Space from top edge */
+}
+
+.header-bar {
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 40px;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.back-arrow {
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.phone-input-content {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1; /* Allow content to grow and push button to bottom */
+  justify-content: space-between; /* Push remaining content apart */
+  padding-bottom: 20px;
+  max-width: 300px;
+}
+
+.phone-input-content h2 {
+  font-size: 1.5em;
+  margin-bottom: 25px;
+  color: white;
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+  background-color: #4c465e;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0; /* Adjusted, as button is separate */
+}
+
+.country-code {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  background-color: #4c465e;
+  color: white;
+  font-size: 1em;
+  gap: 8px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.country-code .flag-icon {
+  width: 24px;
+  height: auto;
+}
+
+.phone-number-input {
+  flex-grow: 1;
+  padding: 12px 15px;
+  border: none;
+  background-color: #4c465e;
+  color: white;
+  font-size: 1em;
+  outline: none;
+  width: 100%; /* Ensure input takes full width of its flex item */
+}
+
+.phone-number-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- OTP Screen --- */
+#otp-screen {
+  background-color: #2f2942;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.otp-content {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  max-width: 300px;
+}
+
+.otp-content h2 {
+  font-size: 1.5em;
+  margin-bottom: 25px;
+  color: white;
+  width: 100%;
+}
+
+.otp-content h2 span {
+  color: #8c82fe;
+  font-weight: bold;
+}
+
+.otp-inputs {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  justify-content: flex-start;
+  margin-bottom: auto; /* Pushes the next element (button) to the bottom */
+}
+
+.otp-input {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: white;
+  background-color: #4c465e;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  caret-color: white;
+  flex-shrink: 0; /* Prevent inputs from shrinking */
+}
+
+/* Bottom button (used in Phone Login & OTP Screen) */
+.btn-bottom {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #f8f8f8;
+  color: #333;
+  font-weight: 600;
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+/* --- Home Screen --- */
+#home-screen {
+  background-color: #2f2942;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0; /* Inner content will handle padding */
+  overflow-y: auto;
+  padding-bottom: 80px; /* Space for bottom navigation */
+}
+
+.home-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #2f2942;
+  position: sticky; /* Sticky header */
+  top: 0;
+  z-index: 10;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-weight: 600;
+}
+
+.profile .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #6a6a6a;
+}
+
+.notification-icon {
+  color: white;
+  font-size: 28px;
+}
+
+.home-main-content {
+  width: 100%;
+  padding: 0 20px; /* Apply horizontal padding here */
+  box-sizing: border-box;
+  flex-grow: 1; /* Allow content to fill available space */
+}
+
+.main-question {
+  font-size: 1.8em;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  line-height: 1.3;
+}
+
+.search-and-filter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.search-bar {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  background-color: #4c465e;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.search-bar .search-icon {
+  color: #cccccc;
+  margin-right: 10px;
+}
+
+.search-bar input {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 0.9em;
+  outline: none;
+  width: 100%;
+}
+
+.search-bar input::placeholder {
+  color: #cccccc;
+}
+
+.location-dropdown {
+  display: flex;
+  align-items: center;
+  background-color: #4c465e;
+  border-radius: 10px;
+  padding: 10px 15px;
+  color: white;
+  font-size: 0.9em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.location-dropdown .dropdown-arrow {
+  margin-left: 5px;
+}
+
+.recommendations-section {
+  margin-bottom: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 1.2em;
+  color: white;
+  margin: 0;
+}
+
+.section-header .see-all {
+  color: #8c82fe;
+  text-decoration: none;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.product-cards-container {
+  display: grid;
+  /* Adjust minmax to ensure two columns generally, but flex for smaller */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+.product-card {
+  background-color: #4c465e;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for cards */
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+}
+
+.product-card .product-image {
+  width: 100%;
+  max-height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 1em;
+  margin: 5px 0;
+  font-weight: 600;
+  width: 100%; /* Ensure full width for text-overflow */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.product-card .product-address {
+  font-size: 0.75em;
+  color: #cccccc;
+  margin-bottom: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.product-card .product-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 0.8em;
+  margin-top: auto; /* Pushes details to the bottom of the card */
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.product-card .rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #ffc107;
+}
+
+.product-card .star-icon {
+  font-size: 1em;
+}
+
+.product-card .price {
+  font-weight: bold;
+  color: #8c82fe;
+}
+
+/* --- Bottom Navigation --- */
+.bottom-navigation {
+  position: fixed; /* Fixed to the viewport */
+  bottom: 0;
+  width: 100%;
+  max-width: 400px; /* Match main-container max-width */
+  background-color: #4c465e;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 20; /* Ensure it's above regular screen content */
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #cccccc;
+  font-size: 0.8em;
+  gap: 3px;
+  padding: 5px 10px;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.nav-item .material-icons {
+  font-size: 24px;
+}
+
+.nav-item.active {
+  color: #8c82fe;
+  font-weight: 600;
+}
+
+/* --- Motor List Screen --- */
+#motor-list-screen {
+  background-color: #2f2942;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  padding-bottom: 80px; /* Space for bottom nav */
+}
+
+.list-header {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center title */
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #2f2942;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.list-header .back-arrow {
+  position: absolute;
+  left: 20px;
+}
+
+.header-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  font-weight: 600;
+}
+
+.header-location .location-icon {
+  font-size: 20px;
+  color: #8c82fe;
+}
+
+.list-content-wrapper {
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.motor-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.motor-list-card {
+  background-color: #4c465e;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.motor-list-card:hover {
+  transform: translateY(-3px);
+}
+
+.motor-list-card .list-product-image {
+  width: 100px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.motor-list-card .list-product-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.motor-list-card h3 {
+  font-size: 1.1em;
+  margin: 0 0 5px 0;
+  font-weight: 600;
+}
+
+.motor-list-card .list-product-address {
+  font-size: 0.8em;
+  color: #cccccc;
+  margin-bottom: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.motor-list-card .list-product-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 0.85em;
+  margin-bottom: 8px;
+}
+
+.motor-list-card .availability {
+  font-size: 0.8em;
+  color: #d1d1d1;
+  margin-top: 5px;
+}
+
+/* --- Motor Detail Screen --- */
+#motor-detail-screen {
+  background-color: #2f2942;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  padding-bottom: 80px; /* Space for bottom bar and nav */
+  overflow-y: auto;
+}
+
+.detail-header {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  position: absolute; /* Positioned relative to main-container */
+  top: 0;
+  left: 0;
+  z-index: 15; /* Above default screen content */
+}
+
+.detail-header .back-arrow {
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+}
+
+.detail-top-image {
+  width: 100%;
+  height: 250px;
+  background-color: #2f2942;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0; /* Prevent image section from shrinking */
+}
+
+.detail-top-image img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+.detail-content-card {
+  background-color: #4c465e;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  width: 100%;
+  flex-grow: 1; /* Allow content to grow */
+  margin-top: -30px; /* Overlap with the image section */
+  position: relative;
+  padding: 30px 20px 20px;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-content-card h1 {
+  font-size: 1.8em;
+  margin: 0 0 5px 0;
+  font-weight: 700;
+}
+
+.detail-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #ffc107;
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+
+.detail-rating .star-icon {
+  font-size: 1.2em;
+}
+
+.detail-address-map {
+  background-color: #6a657c;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 25px;
+}
+
+.address-info {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.map-thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.google-maps-link {
+  color: #8c82fe;
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 500;
+  display: block;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.specs-reviews-tabs {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  cursor: pointer;
+  font-weight: 600;
+  color: #cccccc;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.tab-item.active {
+  color: white;
+}
+
+.tab-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #8c82fe;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.tab-content {
+  display: none;
+  padding-bottom: 20px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.tab-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tab-content table td {
+  padding: 8px 0;
+  font-size: 0.9em;
+  color: #e0e0e0;
+}
+
+.tab-content table td:first-child {
+  width: 45%;
+  font-weight: 500;
+  color: white;
+}
+
+.tab-content table td:last-child {
+  text-align: right;
+}
+
+.detail-bottom-bar {
+  background-color: #2f2942;
+  width: 100%;
+  max-width: 400px;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* Fixed to viewport */
+  bottom: 60px; /* Above bottom-navigation */
+  z-index: 18;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.price-info {
+  display: flex;
+  flex-direction: column;
+  color: #cccccc;
+  font-size: 0.8em;
+}
+
+.price-info .price-value {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #f8f8f8;
+  margin-top: 5px;
+}
+
+.rent-now-button {
+  background-color: #f8b400;
+  color: #333;
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease;
+}
+
+.rent-now-button:hover {
+  background-color: #e0a300;
+}
+
+/* --- Date Selection Screen (Modal) & Payment Method Modal --- */
+/* These are now properly handled as modals in JS with the .screen.modal class */
+
+.date-selection-content-wrapper,
+.payment-method-content-wrapper {
+  background-color: #4c465e; /* Modal background color */
+  border-radius: 20px;
+  width: 90%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 20px;
+  max-height: 80vh; /* Make modal scrollable if content exceeds height */
+  overflow-y: auto;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* Shadow for modal */
+}
+
+.date-selection-header,
+.payment-method-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative; /* For absolute positioning of back arrow */
+  width: 100%;
+}
+
+.date-selection-header .back-arrow,
+.payment-method-header .back-arrow {
+  position: absolute;
+  left: 0;
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+}
+
+.date-selection-header h3,
+.payment-method-header h3 {
+  flex-grow: 1; /* Center the title */
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.calendar-container {
+  width: 100%;
+  background-color: #2f2942; /* Calendar background */
+  border-radius: 15px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.calendar-header h4 {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0;
+}
+
+.calendar-nav-arrow {
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #cccccc;
+  user-select: none;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.8em;
+  color: #8c82fe;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.calendar-weekdays span:first-child, /* Sunday */
+  .calendar-weekdays span:last-child {
+  /* Saturday */
+  color: #f8b400; /* Yellow/Orange for weekend days */
+}
+
+.calendar-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 5px;
+  font-size: 0.9em;
+  color: white;
+}
+
+.calendar-date {
+  /* Renamed from .calendar-date-item for consistency with JS */
+  padding: 8px 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+  user-select: none;
+  font-weight: 500;
+}
+
+.calendar-date.past-date {
+  /* Corrected class for past dates */
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+  background-color: transparent; /* Ensure no background on hover */
+}
+.calendar-date.past-date:hover {
+  background-color: transparent;
+}
+
+.calendar-date.selected {
+  background-color: #8c82fe;
+  color: white;
+  font-weight: 700;
+}
+
+.calendar-date.today {
+  border: 1px solid #f8b400;
+}
+.calendar-date:not(.past-date):hover {
+  /* Add hover effect only for selectable dates */
+  background-color: #6a657c;
+}
+
+.select-date-button {
+  background-color: #f8b400;
+  color: #333;
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.select-date-button:hover {
+  background-color: #e0a300;
+}
+
+/* --- Order Summary Screen --- */
+#order-summary-screen {
+  background-color: #2f2942;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  padding-bottom: 80px; /* Space for bottom nav and button bar */
+  overflow-y: auto;
+}
+
+.order-summary-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #2f2942;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.order-summary-header .back-arrow {
+  position: absolute;
+  left: 20px;
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+}
+
+.order-summary-header h3 {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.order-summary-content-card {
+  background-color: #4c465e;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  width: 100%;
+  flex-grow: 1;
+  margin-top: -10px;
+  padding: 30px 20px 20px;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.order-section {
+  background-color: #6a657c;
+  border-radius: 15px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-section h4 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  color: white;
+}
+
+.order-section .section-description {
+  font-size: 0.8em;
+  color: #d1d1d1;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.order-item:first-of-type {
+  border-top: none;
+}
+
+.order-item p {
+  margin: 0;
+  font-size: 0.95em;
+  color: white;
+  line-height: 1.4;
+}
+
+.order-item p span {
+  display: block;
+}
+
+.btn-change {
+  background-color: #f8b400;
+  color: #333;
+  font-weight: 600;
+  padding: 6px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85em;
+  min-width: 70px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.btn-change:hover {
+  background-color: #e0a300;
+}
+
+.order-summary-bottom-bar {
+  background-color: #2f2942;
+  width: 100%;
+  max-width: 400px;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 60px; /* Above bottom-navigation */
+  z-index: 18;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.total-price-info {
+  display: flex;
+  flex-direction: column;
+  color: #cccccc;
+  font-size: 0.85em;
+}
+
+.total-price-info .total-price-value {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #f8f8f8;
+  margin-top: 5px;
+}
+
+.payment-button {
+  background-color: #f8b400;
+  color: #333;
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease;
+}
+
+.payment-button:hover {
+  background-color: #e0a300;
+}
+
+/* --- Payment Method Modal --- */
+/* .payment-method-content-wrapper styles are combined with .date-selection-content-wrapper */
+
+.payment-options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.payment-section-title {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #d1d1d1;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.payment-section-title:first-of-type {
+  margin-top: 0;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  background-color: #2f2942; /* Background for each option */
+  border-radius: 10px;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.payment-option:hover {
+  background-color: #3f3950;
+}
+
+.payment-option img {
+  height: 25px;
+  width: auto;
+  margin-right: 15px;
+  object-fit: contain;
+}
+
+.payment-option span {
+  flex-grow: 1;
+  font-size: 1em;
+  font-weight: 500;
+  color: white;
+}
+
+.payment-option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #8c82fe;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0; /* Prevent radio button from shrinking */
+}
+
+.payment-option input[type="radio"]:checked {
+  background-color: #8c82fe;
+  border-color: #8c82fe;
+}
+
+.payment-option input[type="radio"]:checked::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#btn-pilih-payment-method {
+  margin-top: 20px;
+}
+
+/* --- Payment Confirmation Screen --- */
+#payment-confirmation-screen {
+  background-color: #2f2942;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  padding-bottom: 80px; /* Space for bottom nav and button bar */
+  overflow-y: auto;
+}
+
+.conf-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #2f2942;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.conf-header .back-arrow {
+  position: absolute;
+  left: 20px;
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+}
+
+.conf-header h3 {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.conf-content-card {
+  background-color: #4c465e;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  width: 100%;
+  flex-grow: 1;
+  margin-top: -10px;
+  padding: 30px 20px 20px;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.conf-motor-info {
+  background-color: #f8b400;
+  color: #333;
+  border-radius: 15px;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.conf-motor-info p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.conf-motor-info #conf-motor-name {
+  font-size: 1.1em;
+}
+
+.conf-motor-info #conf-date {
+  font-size: 0.9em;
+  color: rgba(51, 51, 51, 0.8);
+}
+
+.conf-motor-info .btn-change {
+  background-color: #2f2942;
+  color: white;
+  padding: 8px 18px;
+}
+
+.conf-payment-details {
+  background-color: #6a657c;
+  border-radius: 15px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.payment-method-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.payment-method-row .payment-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+}
+
+.payment-method-row div {
+  flex-grow: 1;
+}
+
+.payment-method-row p {
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
+.payment-method-row #conf-payment-method-name {
+  font-weight: 600;
+  color: white;
+}
+
+.payment-method-row #conf-account-details {
+  font-size: 0.85em;
+  color: #d1d1d1;
+}
+
+.payment-method-row .btn-change {
+  background-color: #f8b400;
+  color: #333;
+}
+
+.view-qr-code {
+  color: #f8b400;
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: right;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.view-qr-code:hover {
+  color: #e0a300;
+}
+
+.payment-timer-section {
+  background-color: #f8b400;
+  color: #333;
+  border-radius: 15px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.timer-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.timer-icon .material-icons {
+  font-size: 20px;
+}
+
+.timer-display {
+  font-size: 2em;
+  font-weight: bold;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.timer-display span {
+  background-color: #2f2942; /* Background for timer numbers */
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  min-width: 45px;
+  display: inline-block;
+  text-align: center; /* Ensure numbers are centered in their background */
+}
+
+.timer-display span:nth-child(even) {
+  /* For colons */
+  background: none;
+  color: #2f2942; /* Dark color for colons to stand out against yellow */
+  padding: 0;
+  min-width: unset;
+}
+
+.conf-bottom-bar {
+  background-color: #2f2942;
+  width: 100%;
+  max-width: 400px;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 60px; /* Above bottom-navigation */
+  z-index: 18;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.conf-bottom-bar .total-price-info {
+  /* Uses same style from order summary */
+}
+
+.conf-bottom-bar .payment-button {
+  /* Uses same style from order summary, but can be overridden if needed */
+}
+
+/* --- Payment Success Screen --- */
+#payment-success-screen {
+  background-color: #2f2942; /* Changed to match app theme */
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  padding-bottom: 20px; /* Padding for content before the fixed button */
+  overflow-y: auto;
+}
+
+.success-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px 20px;
+  box-sizing: border-box;
+  background-color: #2f2942;
+  color: white;
+  text-align: center;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.check-circle-icon {
+  font-size: 60px;
+  color: #f8b400;
+  margin-bottom: 10px;
+}
+
+.success-header h3 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.success-content-card {
+  background-color: white; /* White background for this card */
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  width: 100%;
+  flex-grow: 1; /* Allow card to grow */
+  margin-top: -30px;
+  padding: 30px 20px 20px;
+  box-sizing: border-box;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow from top */
+}
+
+.success-content-card h2 {
+  font-size: 1.4em;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.success-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95em;
+}
+
+.detail-row span:first-child {
+  font-weight: 500;
+  color: #555;
+}
+
+.detail-row span:last-child {
+  font-weight: 600;
+  color: #333;
+  text-align: right;
+}
+
+.total-cost-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8b400;
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-top: 15px;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #333;
+}
+
+.success-bottom-bar {
+  background-color: #2f2942; /* Matches app main background */
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0; /* Stays at the very bottom */
+  z-index: 18;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.full-width-button {
+  width: 100%;
+  background-color: #f8b400;
+  color: #333;
+  font-weight: 600;
+  padding: 15px 25px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.2s ease;
+}
+
+.full-width-button:hover {
+  background-color: #e0a300;
+}
+
+/* --- Pemesanan Screen (Adjusted to Dark Theme) --- */
+#pemesanan-berlangsung-screen {
+  background-color: #2f2942; /* Dark theme background */
+  padding-top: 20px; /* Space from top */
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-bottom: 80px; /* Space for bottom nav */
+  overflow-y: auto;
+}
+
+#pemesanan-berlangsung-screen .header-tabs {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-color: #4c465e; /* Darker tab background */
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  flex-shrink: 0; /* Prevent tabs from shrinking */
+}
+
+#pemesanan-berlangsung-screen .header-tabs span {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #cccccc; /* Lighter grey for inactive tabs */
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+#pemesanan-berlangsung-screen .header-tabs span.active {
+  color: #f8b400; /* Yellow accent */
+  border-color: #f8b400;
+}
+
+#pemesanan-berlangsung-screen h2 {
+  font-size: 1.4em; /* Slightly larger heading */
+  color: white; /* White for heading */
+  padding: 0 20px;
+  margin-bottom: 15px;
+  width: 100%; /* Ensure heading takes full width for padding */
+  box-sizing: border-box;
+}
+
+/* Booking Card */
+.booking-card {
+  background-color: #4c465e; /* Card background matches other cards */
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Darker shadow */
+  margin: 0 20px 20px 20px; /* Add bottom margin for separation */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: white; /* Default text color for card */
+}
+
+.booking-card .card-header {
+  background-color: #2f2942; /* Darker header within card */
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.booking-card .card-header .chat-button {
+  background-color: #f8b400; /* Yellow */
+  color: #333;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.booking-card .card-header .chat-button:hover {
+  background-color: #e0a300;
+}
+
+.booking-card .card-header .chat-button .notification-dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  background-color: #ff0000; /* Red */
+  border-radius: 50%;
+  border: 2px solid #4c465e; /* Border matches card background */
+}
+
+.booking-card .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #d1d1d1; /* Lighter grey for content text */
+  font-size: 14px;
+}
+
+.booking-card .card-content strong {
+  color: white; /* White for strong text */
+}
+
+.booking-card .view-e-ticket-button {
+  background-color: transparent;
+  color: #f8b400; /* Yellow */
+  border: 1px solid #f8b400;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 15px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.booking-card .view-e-ticket-button:hover {
+  background-color: #f8b400;
+  color: #333;
+}
+
+/* Ensure bottom navigation is correctly positioned for this screen */
+#pemesanan-berlangsung-screen .bottom-navigation {
+  /* These styles are mostly handled by the global .bottom-navigation */
+  /* Remove specific positioning here to avoid conflicts, let global rule apply */
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+:root {
+  --bg-dark: #201a2b; /* Warna latar belakang utama */
+  --card-bg: #2b233a; /* Warna latar belakang kartu/opsi */
+  --text-light: #f1f1f1;
+  --text-gray: #a0a0a0;
+  --icon-color: #f1f1f1;
+  --accent-color: #6a0dad; /* Warna ungu untuk beberapa aksen */
+  --border-color: #3a324b;
+  --active-nav-color: #9c27b0; /* Warna ungu terang untuk nav aktif */
+  --camera-bg: #4a4a4a; /* Warna latar belakang ikon kamera */
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.container {
+  background-color: var(--bg-dark);
+  width: 100%;
+  max-width: 400px; /* Lebar maksimal seperti tampilan mobile */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  position: relative; /* Untuk bottom-nav */
+}
+
+/* Header Profil */
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px 20px;
+  background-color: var(--bg-dark);
+}
+
+.profile-avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #6a0dad; /* Border warna ungu */
+}
+
+.camera-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: var(--camera-bg); /* Warna latar belakang ikon kamera */
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.camera-icon i {
+  color: var(--text-light);
+  font-size: 16px;
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.profile-phone {
+  margin: 5px 0 0;
+  font-size: 16px;
+  color: var(--text-gray);
+}
+
+/* Opsi Profil */
+.profile-options {
+  flex-grow: 1; /* Agar mengambil sisa ruang */
+  padding: 20px;
+  background-color: var(--bg-dark);
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  background-color: var(--card-bg);
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: var(--text-light);
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.option-item:hover {
+  background-color: #3b304f; /* Sedikit lebih terang saat hover */
+}
+
+.option-item i {
+  font-size: 20px;
+  margin-right: 15px;
+  color: var(--icon-color);
+}
+
+.option-item span {
+  flex-grow: 1;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.arrow-icon {
+  font-size: 16px;
+  color: var(--text-gray);
+}
+
+.logout-button {
+  background-color: var(--card-bg); /* Sama seperti opsi lain */
+  color: var(--text-light); /* Warna teks keluar */
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 70px;
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-gray);
+  font-size: 12px;
+  transition: color 0.3s ease;
+  flex: 1;
+  text-align: center;
+  padding: 5px 0;
+}
+
+.nav-item i {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.nav-item.active {
+  color: var(--active-nav-color); /* Warna ungu terang untuk item aktif */
+}
+
+.nav-item:hover:not(.active) {
+  color: var(--text-light); /* Efek hover untuk item tidak aktif */
+}
+
+/* Responsiveness for smaller screens (if needed, though max-width handles it) */
+@media (max-width: 480px) {
+  .profile-header {
+    padding: 25px 15px 15px;
+  }
+
+  .profile-avatar-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-name {
+    font-size: 22px;
+  }
+
+  .profile-phone {
+    font-size: 15px;
+  }
+
+  .option-item {
+    padding: 12px 15px;
+    margin-bottom: 12px;
+  }
+
+  .option-item i {
+    font-size: 18px;
+    margin-right: 12px;
+  }
+
+  .option-item span {
+    font-size: 15px;
+  }
+
+  .bottom-nav {
+    height: 60px;
+  }
+
+  .nav-item i {
+    font-size: 18px;
+  }
+
+  .nav-item span {
+    font-size: 11px;
+  }
+}
+/* --- Profile Screen Styles --- */
+#profile-screen {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: space-between; /* Push content to top and bottom nav to bottom */
+  padding-bottom: 70px; /* Space for bottom navigation */
+  background-color: #2c2c3e; /* Darker background from Figma */
+  color: #ffffff;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 20px;
+  width: 100%;
+}
+
+.profile-avatar-container {
+  position: relative;
+  width: 120px; /* Adjust size as needed */
+  height: 120px; /* Adjust size as needed */
+  margin-bottom: 15px;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff; /* White border around avatar */
+}
+
+.camera-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #8a2be2; /* Or any accent color */
+  color: #fff;
+  border-radius: 50%;
+  padding: 8px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #2c2c3e; /* Border to separate from main avatar if needed */
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.profile-phone {
+  font-size: 16px;
+  color: #b0b0b0; /* Lighter gray for phone number */
+}
+
+.profile-options {
+  width: 90%;
+  max-width: 400px; /* Limit width for larger screens */
+  margin-top: 30px;
+  flex-grow: 1; /* Allow options to take up available space */
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  background-color: #3b3b55; /* Slightly lighter dark for options background */
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.option-item:hover {
+  background-color: #4a4a6a; /* Darker hover effect */
+}
+
+.option-icon {
+  font-size: 24px;
+  margin-right: 15px;
+  color: #8a2be2; /* Accent color for icons */
+}
+
+.option-text {
+  flex-grow: 1; /* Pushes arrow to the right */
+}
+
+.arrow-icon {
+  font-size: 24px;
+  color: #b0b0b0; /* Lighter gray for arrows */
+}
+
+.logout-option {
+  background-color: #3b3b55; /* Same background for logout */
+  color: #ff6b6b; /* Reddish color for logout text */
+  margin-top: 30px; /* Space above logout button */
+  justify-content: center; /* Center content for logout button */
+}
+
+.logout-option .option-icon {
+  color: #ff6b6b; /* Reddish color for logout icon */
+}
+
+/* Ensure bottom navigation is always at the bottom */
+#profile-screen .bottom-navigation {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  /* Add any other necessary styles from your existing bottom-navigation */
+}
+
+/* General screen styles (ensure these are present in your style.css) */
+.screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: auto; /* Enable scrolling for content that exceeds screen height */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.screen.active {
+  display: flex; /* Changed from block to flex for profile screen for better layout control */
+  flex-direction: column;
+}
